@@ -6,6 +6,9 @@ This is mostly a script trying to convert the mask into an image losslessly.
 The background image (often just yellowing paper) makes the document less-readable.
 Smaller pdf with single image per page (without requiring compositing) also loads faster, too.
 
+The final `extract-all-mask.py` script keeps the original front and back cover, but converts every
+page from 2 to N-1 from image+mask to just the mask.
+
 Out of about 400 such pdf's:
 
 * There is one (also apparently the oldest by its creation/modification date)
