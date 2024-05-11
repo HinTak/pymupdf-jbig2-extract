@@ -9,8 +9,7 @@ import os
 
 import fitz
 
-from fitz import Pixmap
-
+from PIL import Image
 import io
 
 fname = sys.argv[1] if len(sys.argv) == 2 else None
@@ -28,9 +27,9 @@ for page in doc.pages():
     if ((ImageList[0][8] == 'FlateDecode') and (ImageList[0][5] == 'DeviceRGB')):
         xref = ImageList[0][0]
         print(pno, xref)
-        pix = Pixmap(doc, xref)
+        img = Image.open(io.BytesIO(doc.extract_image(xref)['image']))
         tmpfilename = "tmp-%d-%d.jpg" % (pno, xref)
-        pix.save(tmpfilename)
+        img.save(tmpfilename, optimize=True)
         page.replace_image(xref, filename=tmpfilename)
         os.remove(tmpfilename)
 doc.save("1.pdf")
