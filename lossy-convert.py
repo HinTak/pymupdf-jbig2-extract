@@ -32,4 +32,4 @@ for page in doc.pages():
         img.save(tmpfilename, optimize=True)
         page.replace_image(xref, filename=tmpfilename)
         os.remove(tmpfilename)
-doc.save("1.pdf")
+doc.save("1.pdf", no_new_id=True)
