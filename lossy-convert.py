@@ -2,7 +2,7 @@
 
 # Copyright 2024 Hin-Tak Leung
 
-# extract all image masks from a pdf (consisting of scans, many from LuraDocument)
+# convert RGB FlateDecode images to JPEG in a pdf.
 
 import sys
 import os
