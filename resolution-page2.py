@@ -41,4 +41,3 @@ for page in doc.pages():
                         print("OK-A")
                     if (dpi == 360):
                         print("OK-B")
-                        
