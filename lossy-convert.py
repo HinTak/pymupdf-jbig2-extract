@@ -29,7 +29,7 @@ for page in doc.pages():
         print(pno, xref)
         img = Image.open(io.BytesIO(doc.extract_image(xref)['image']))
         tmpfilename = "tmp-%d-%d.jpg" % (pno, xref)
-        img.save(tmpfilename, optimize=True)
+        img.save(tmpfilename, optimize=True, progressive=True)
         page.replace_image(xref, filename=tmpfilename)
         os.remove(tmpfilename)
 doc.save("1.pdf", no_new_id=True)
