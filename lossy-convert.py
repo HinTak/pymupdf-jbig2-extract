@@ -29,6 +29,9 @@ for page in doc.pages():
         print(pno, xref)
         img = Image.open(io.BytesIO(doc.extract_image(xref)['image']))
         tmpfilename = "tmp-%d-%d.jpg" % (pno, xref)
+        # fitz.Pixmap.save's default is equivalent to:
+        #     optimize=False, progressive=True, dpi=(96, 96), subsampling='4:4:4', quality=95
+        # quality=95 is a pymupdf setting, the rest is mupdf's (quality=90).
         img.save(tmpfilename, optimize=True, progressive=True)
         page.replace_image(xref, filename=tmpfilename)
         os.remove(tmpfilename)
