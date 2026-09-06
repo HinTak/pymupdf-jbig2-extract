@@ -41,6 +41,7 @@ for page in doc.pages():
         if (xref > 0):
 #            a = fitz.Pixmap(doc, xref)
             c = doc.extract_image(xref)["image"]
+            raw_data = doc.xref_stream_raw(xref)
             if (print_once):
                 print(doc.extract_image(xref)['ext'], doc.extract_image(xref)['colorspace'], doc.extract_image(xref)['cs-name'])
                 if (doc.extract_image(xref)['cs-name'] == 'DeviceGray'):
@@ -49,7 +50,7 @@ for page in doc.pages():
 #            a.save("page%03d-%d.png" % (pno+1, xref))
             if (not (xref in xref_hash.keys())):
                 fout = open('tmp-jbig-%03d-%d' % (pno+1, xref), "wb")
-                fout.write(c)
+                fout.write(raw_data)
                 fout.close()
 #                xref_hash[xref] = 1
 #            subprocess.call('jbig2dec -e -o alt-page%03d-%d.png tmp-jbig-%03d-%d' % (pno+1, xref, pno+1, xref), shell=True)
