@@ -32,30 +32,35 @@ def analyze_pdf(pdf_path, output_dir="pdf_streams"):
 
         if doc.xref_is_stream(xref):
             # Get stream metadata
-            length = doc.xref_stream_length(xref)
-            filters = doc.xref_get_key(xref, "Filter")[1]
+            try:
+                filters = doc.xref_get_key(xref, "Filter")[1]
+            except Exception:
+                filters = None
 
-            print(f"[xref {xref}] Stream object | Type: {obj_type} | Length: {length} | Filter: {filters}")
-
-            # Extract raw stream
+            # Get raw stream and its length
             try:
                 raw_data = doc.xref_stream_raw(xref)
+                raw_len = len(raw_data)
                 raw_path = os.path.join(output_dir, f"xref_{xref}_raw.bin")
                 with open(raw_path, "wb") as f:
                     f.write(raw_data)
             except Exception as e:
-                print(f"  Error reading raw stream: {e}")
+                print(f"[xref {xref}] Error reading raw stream: {e}")
+                raw_data = b""
+                raw_len = 0
                 raw_path = None
 
-            # Extract decoded stream
+            # Get decoded stream
             try:
                 decoded_data = doc.xref_stream(xref)
                 decoded_path = os.path.join(output_dir, f"xref_{xref}_decoded.bin")
                 with open(decoded_path, "wb") as f:
                     f.write(decoded_data)
             except Exception as e:
-                print(f"  Error reading decoded stream: {e}")
+                print(f"[xref {xref}] Error reading decoded stream: {e}")
                 decoded_path = None
+
+            print(f"[xref {xref}] Stream object | Type: {obj_type} | Raw length: {raw_len} | Filter: {filters}")
 
         else:
             # Non-stream object
