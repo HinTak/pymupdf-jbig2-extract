@@ -1,5 +1,8 @@
-Note 2026 Apr: This was developed mainly during PyMuPDF 1.23.x. It is known to work in 1.24.14,
-1.25.0, 1.25.1 too, but breaks in 1.25.2 onwards and 1.26.x . TO FIX.
+This was developed mainly during PyMuPDF 1.23.x; updated to work with 1.28.x
+(after a breakage between 1.25.1 and 1.25.2, due to change in upstream API internals)
+while contines to work with 1.25.1 .
+See [discussion](https://github.com/pymupdf/PyMuPDF/discussions/4956).
+Somehow the upgrade is also about 2.5x faster too!
 
 Some pdf's (those from the Internet Archive, apparently) consist of mostly
 scans. Structurally, every page is a background image with a mask, occasionally with
