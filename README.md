@@ -2,7 +2,7 @@ This was developed mainly during PyMuPDF 1.23.x; updated to work with 1.28.x
 (after a breakage between 1.25.1 and 1.25.2, due to change in upstream API internals)
 while contines to work with 1.25.1 .
 See [discussion](https://github.com/pymupdf/PyMuPDF/discussions/4956).
-Somehow the upgrade is also about 2.5x faster too!
+Somehow the upgrade is also about 2.3x faster too! (About 1.4 from python 3.13 vs 3.14).
 
 Some pdf's (those from the Internet Archive, apparently) consist of mostly
 scans. Structurally, every page is a background image with a mask, occasionally with
